@@ -2,7 +2,11 @@
 
 declare -a arr
 
-N=1000
+if [ $# -gt 0 ]; then
+    N=$1;
+else
+    N=1000
+fi
 
 for ((i=0;i<N;i++)) do
     arr[i]=$RANDOM
