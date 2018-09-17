@@ -40,7 +40,7 @@ echo ""
 echo "         N          Time"
 echo ""
 
-while [ $n -le $end ]; do
+while [ $n -lt $end ]; do
     unrolled="_unrolled_"
     file_name=$input$unrolled$n.sh
     t=$({((/usr/bin/time -f "%e" ./${file_name} $@)>/dev/null)} 2>&1)
