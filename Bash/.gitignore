@@ -1,1 +1,2 @@
-# Nothing to ignore
+lcg/lcg_unrolled_*.sh
+!lcg/lcg_unrolled_1.sh
