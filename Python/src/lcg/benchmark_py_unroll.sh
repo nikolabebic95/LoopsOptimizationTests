@@ -35,13 +35,12 @@ n=$start
 echo ""
 echo "  Benchmark ${input} from ${start} to ${end} with step 1."
 echo ""
-echo "         N          Time"
+echo "         N            Ri            Time"
 echo ""
 
 while [ $n -lt $end ]; do
     unrolled="_unrolled_"
-    file_name=$input$unrolled$n.sh
-    t=$({((/usr/bin/time -f "%e" ./${file_name} $@)>/dev/null)} 2>&1)
-    printf "  %8s  %12s\n" $n $t
+    file_name=$input$unrolled$n.py
+    python3 "$file_name"
     n=$((n+1))
 done

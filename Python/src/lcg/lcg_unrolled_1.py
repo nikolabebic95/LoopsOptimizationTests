@@ -3,18 +3,7 @@ import time
 
 
 def lcg_random(seed, a, c, m, n):
-    for i in range(n % 10):
-        seed = (a * seed + c) % m
-    for i in range(n // 10):
-        seed = (a * seed + c) % m
-        seed = (a * seed + c) % m
-        seed = (a * seed + c) % m
-        seed = (a * seed + c) % m
-        seed = (a * seed + c) % m
-        seed = (a * seed + c) % m
-        seed = (a * seed + c) % m
-        seed = (a * seed + c) % m
-        seed = (a * seed + c) % m
+    for i in range(n):
         seed = (a * seed + c) % m
     return seed
 
@@ -39,11 +28,11 @@ def main():
 
     start = time.time()
 
-    lcg_random(seed, a, c, m, n)
+    num = lcg_random(seed, a, c, m, n)
 
     elapsed = time.time() - start
 
-    print("Elapsed:", elapsed)
+    print("  %8d  %12d  %14f" % (1, num, elapsed))
 
 
 if __name__ == '__main__':

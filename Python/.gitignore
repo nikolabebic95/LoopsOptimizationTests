@@ -61,3 +61,7 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+# Lcg unroll
+src/lcg/lcg_unrolled_*.py
+!src/lcg/lcg_unrolled_1.py
