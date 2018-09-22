@@ -3,15 +3,15 @@ import time
 
 
 def process_image():
-    img = cv.imread("small_image.png")
+    img = cv.imread("image.png")
 
     height, width = img.shape[:2]
 
     for i in range(height):
         for j in range(width):
-            rgb = img[i, j]
-            new_rgb = sum(rgb) // 3
-            img[i, j] = [new_rgb, new_rgb, new_rgb]
+            bgr = img[i, j]
+            new_bgr = 0.11 * bgr[0] + 0.59 * bgr[1] + 0.3 * bgr[2]
+            img[i, j] = [new_bgr, new_bgr, new_bgr]
 
     cv.imwrite("small_image_grayscale.png", img)
 

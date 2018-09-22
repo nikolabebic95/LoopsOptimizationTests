@@ -2,13 +2,13 @@ import cv2 as cv
 import time
 import math
 import numpy as np
-from numba import guvectorize, uint8
+from numba import guvectorize, uint8, int32
 
 
-@guvectorize([(uint8[:, :, :], uint8[:, :, :])], '(n, m, p)->(n, m, p)')
-def cuda_kernel(img, new_img):
-    for y in range(1, img.shape[0] - 1):
-        for x in range(1, img.shape[1] - 1):
+@guvectorize([(uint8[:, :, :], int32, int32, uint8[:, :, :])], '(n, m, p), (), ()->(n, m, p)')
+def cuda_kernel(img, height, width, new_img):
+    for y in range(1, height - 1):
+        for x in range(1, width - 1):
 
             # initialise Gx to 0 and Gy to 0 for every pixel
             Gx = 0

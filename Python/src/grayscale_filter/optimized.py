@@ -3,7 +3,7 @@ import time
 
 
 def process_image():
-    img = cv.imread("small_image.png")
+    img = cv.imread("image.png")
 
     gray_image = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
