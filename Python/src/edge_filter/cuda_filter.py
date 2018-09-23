@@ -10,80 +10,64 @@ def cuda_kernel(img, height, width, new_img):
     for y in range(1, height - 1):
         for x in range(1, width - 1):
 
-            # initialise Gx to 0 and Gy to 0 for every pixel
-            Gx = 0
-            Gy = 0
+            # initialise gx to 0 and gy to 0 for every pixel
+            gx = 0
+            gy = 0
 
             # top left pixel
             p = img[y - 1, x - 1]
-            r = p[0]
-            g = p[1]
-            b = p[2]
+            b, g, r = p[0], p[1], p[2]
 
             # intensity ranges from 0 to 765 (255 * 3)
             intensity = (int(r) + int(g) + int(b))
 
-            # accumulate the value into Gx, and Gy
-            Gx += -intensity
-            Gy += -intensity
+            # accumulate the value into gx, and gy
+            gx += -intensity
+            gy += -intensity
 
             # remaining left column
             p = img[y, x - 1]
-            r = p[0]
-            g = p[1]
-            b = p[2]
+            b, g, r = p[0], p[1], p[2]
 
-            Gx += -2 * (int(r) + int(g) + int(b))
+            gx += -2 * (int(r) + int(g) + int(b))
 
             p = img[y + 1, x - 1]
-            r = p[0]
-            g = p[1]
-            b = p[2]
+            b, g, r = p[0], p[1], p[2]
 
-            Gx += -(int(r) + int(g) + int(b))
-            Gy += (int(r) + int(g) + int(b))
+            gx += -(int(r) + int(g) + int(b))
+            gy += (int(r) + int(g) + int(b))
 
             # middle pixels
             p = img[y - 1, x]
-            r = p[0]
-            g = p[1]
-            b = p[2]
+            b, g, r = p[0], p[1], p[2]
 
-            Gy += -2 * (int(r) + int(g) + int(b))
+            gy += -2 * (int(r) + int(g) + int(b))
 
             p = img[y + 1, x]
-            r = p[0]
-            g = p[1]
-            b = p[2]
+            b, g, r = p[0], p[1], p[2]
 
-            Gy += 2 * (int(r) + int(g) + int(b))
+            gy += 2 * (int(r) + int(g) + int(b))
 
             # right column
             p = img[y - 1, x + 1]
-            r = p[0]
-            g = p[1]
-            b = p[2]
+            b, g, r = p[0], p[1], p[2]
 
-            Gx += (int(r) + int(g) + int(b))
-            Gy += -(int(r) + int(g) + int(b))
+            gx += (int(r) + int(g) + int(b))
+            gy += -(int(r) + int(g) + int(b))
 
             p = img[y, x + 1]
-            r = p[0]
-            g = p[1]
-            b = p[2]
+            b, g, r = p[0], p[1], p[2]
 
-            Gx += 2 * (int(r) + int(g) + int(b))
+            gx += 2 * (int(r) + int(g) + int(b))
 
             p = img[y + 1, x + 1]
-            r = p[0]
-            g = p[1]
-            b = p[2]
+            b, g, r = p[0], p[1], p[2]
 
-            Gx += (int(r) + int(g) + int(b))
-            Gy += (int(r) + int(g) + int(b))
+            gx += (int(r) + int(g) + int(b))
+            gy += (int(r) + int(g) + int(b))
 
             # calculate the length of the gradient (Pythagorean theorem)
-            length = math.sqrt((Gx * Gx) + (Gy * Gy))
+            length = math.sqrt((gx * gx) + (gy * gy))
 
             # normalise the length of gradient to the range 0 to 255
             length = length / 4328 * 255
