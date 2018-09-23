@@ -85,7 +85,7 @@ def process_image():
 
     new_img = np.empty((height, width, 3), np.uint8)
 
-    cuda_kernel(img, new_img)
+    cuda_kernel(img, height, width, new_img)
 
     cv.imwrite("image4k_edges_cuda.jpg", new_img)
 
