@@ -3,7 +3,8 @@ import time
 
 
 def process_image():
-    img = cv.imread("image.png")
+    file = "hram"
+    img = cv.imread(file + ".jpg")
 
     height, width = img.shape[:2]
 
@@ -13,7 +14,7 @@ def process_image():
             new_bgr = 0.11 * bgr[0] + 0.59 * bgr[1] + 0.3 * bgr[2]
             img[i, j] = [new_bgr, new_bgr, new_bgr]
 
-    cv.imwrite("small_image_grayscale.png", img)
+    cv.imwrite(file + "_grayscale.jpg", img)
 
 
 def main():
